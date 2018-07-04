@@ -474,4 +474,40 @@ const numJewelsInStones = function(J, S) {
         sum += mapVals[i];
     }
     return sum;
+    
+    
+    
+ 
+    /**
+ * @param {string[]} words
+ * @return {number}
+ */
+var uniqueMorseRepresentations = function(words) {
+    var map = {};
+    for (var i =0; i<words.length; i++) {
+        var transformation = transform(words[i]);
+        if (map[transformation]) continue;
+        else map[transformation] = true;
+    }
+    return Object.keys(map).length;
+};
+
+        /**
+ * @param {string} word
+ * @return {string} transformation
+ */
+var transform = function(word) {
+    var morse_code = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
+    var morse_table = {};
+    var transformation = '';
+    var alphabets = 'abcdefghijklmnopqrstuvwxyz';
+    for (var i =0; i<26; i++) morse_table[alphabets[i]] = morse_code[i];
+    
+    for (var i = 0; i<word.length; i++) {
+        transformation += morse_table[word[i]];
+    }
+    
+    return transformation;
+    
+}
 };
