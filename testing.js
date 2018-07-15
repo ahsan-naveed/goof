@@ -514,22 +514,47 @@ var transform = function(word) {
 
 
 
-
+// Question Credits: leetcode
 /**
  * @param {number[][]} A
  * @return {number[][]}
  */
-var flipAndInvertImage = function(A) {
-    
+var flipAndInvertImage = function(A) {   
     for (var i =0; i<A.length; i++) {
         A[i] = A[i].reverse();
         for (var j =0; j<A[i].length; j++) {
              A[i][j] ^=  1;
+        }
     }
-    }
-    
     return A
-    
 };
 
 
+/**
+ * @param {string} str
+ * @return {string}
+ */
+var toLowerCase = function(str) {
+    
+    var lowerCase = '';
+    str = str.trim();
+    // Solution 1 
+    // for (var i = 0; i<str.length; i++) {
+    //     var currentCharCode = str.charCodeAt(i);
+    //     if (currentCharCode <= 90 && currentCharCode >= 65) {
+    //         lowerCase += String.fromCharCode(currentCharCode + 32);
+    //     } else {
+    //         lowerCase += str[i];
+    //     }
+    // }
+    
+    // solution 2 -> 80% faster than solution 1
+    var uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var lowers = 'abcdefghijklmnopqrstuvwxyz';
+    for (var i = 0; i<str.length; i++) {
+        var index = uppers.indexOf(str[i]);
+        if (index !== -1) lowerCase += lowers[index];
+        else lowerCase += str[i];
+    }
+    return lowerCase;
+};
