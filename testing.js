@@ -558,3 +558,61 @@ var toLowerCase = function(str) {
     }
     return lowerCase;
 };
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+
+var searchInsert = function (nums, target) {
+    var lo = 0;
+    var hi = nums.length - 1;
+    
+    if (target < nums[lo]) return lo;
+    if (target > nums[hi]) return hi + 1;
+
+    while ( lo <= hi) {
+        var mid = Math.floor(lo + ((hi - lo) / 2));
+        if (target < nums[mid]) hi = mid - 1;
+        else if (target > nums[mid]) lo = mid + 1;
+        return mid;
+    }
+    
+    return lo;
+}
+
+
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        var lo = 1;
+        var hi = n;
+        
+        while ( lo < hi ) {
+            var mid = Math.floor(lo + (hi - lo) / 2);
+            if (isBadVersion(mid)) hi = mid;
+            else  lo = mid + 1;
+        }
+        
+        return lo;
+    };
+};
